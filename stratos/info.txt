@@ -1,0 +1,81 @@
+STRATOS - PROJECT DOCUMENTATION & CODE EXPLANATION
+=================================================
+
+PROJECT OVERVIEW
+----------------
+Stratos is an AI-powered study intelligence system designed to optimize learning behavior, predict academic performance, and provide a seamless study planning experience. It uses the T3 Stack (Next.js, tRPC, Prisma, NextAuth) for a type-safe, high-performance architecture.
+
+TECH STACK & WHY
+----------------
+1. NEXT.JS 15 (APP ROUTER):
+   - Why: Best for server-side rendering (SSR), static site generation (SSG), and a modern developer experience with the App Router.
+   - Key Feature: Server Components for faster data fetching and improved performance.
+
+2. TRPC:
+   - Why: Provides end-to-end type safety between the client and server without the need for manual REST API documentation or boilerplate.
+   - Key Feature: Instant IDE autocompletion for API routes.
+
+3. PRISMA 7 & POSTGRESQL:
+   - Why: Prisma is a powerful ORM that ensures database operations are type-safe and intuitive. PostgreSQL is a robust, production-ready relational database.
+   - Key Feature: Schema-driven development and easy migrations.
+
+4. NEXTAUTH.JS:
+   - Why: Simplifies authentication with various providers (Google, GitHub, etc.) and provides secure session management.
+   - Key Feature: Easy integration with Prisma as an adapter.
+
+5. TAILWIND CSS 4 & FRAMER MOTION:
+   - Why: Tailwind for rapid, utility-first styling. Framer Motion for high-quality, declarative animations.
+   - Key Feature: Glassmorphism UI theme for a premium SaaS look.
+
+6. RECHARTS & CYTOSCAPE.JS:
+   - Why: Recharts for clean, responsive data visualizations. Cytoscape.js for complex graph-based relationships (Knowledge Graph).
+
+CODE EXPLANATION (KEY FILES)
+----------------------------
+
+1. src/server/db.ts:
+   - Line 1-3: Imports PrismaClient and the PostgreSQL adapter.
+   - Line 5-7: Creates a global object to prevent multiple Prisma instances in development.
+   - Line 9-10: Configures a connection pool and the Prisma adapter.
+   - Line 12-17: Initializes the PrismaClient with the adapter and logging.
+
+2. src/server/api/trpc.ts:
+   - Line 1-7: Imports tRPC initialization helpers and context dependencies.
+   - Line 13-19: Defines the context for tRPC, providing access to the database and user session.
+   - Line 21-34: Initializes tRPC with a superjson transformer and custom error formatting.
+   - Line 41-51: Defines 'protectedProcedure' to ensure only authenticated users can access certain API routes.
+
+3. src/components/Timer.tsx:
+   - Line 4-9: State management for minutes, seconds, and timer status (active/break).
+   - Line 11-32: useEffect hook that handles the countdown logic using setInterval.
+   - Line 54-82: SVG-based circular progress bar that updates dynamically as time elapses.
+   - Line 84-118: Render logic for the timer display and controls (Play, Pause, Reset).
+
+4. src/components/KnowledgeGraph.tsx:
+   - Line 4: Imports Cytoscape.js for graph rendering.
+   - Line 6-22: Mock data representing subjects, topics, and their dependencies.
+   - Line 25-78: useEffect hook that initializes the Cytoscape graph, applies custom styling based on mastery strength, and sets up a 'cose' (force-directed) layout.
+
+5. src/app/dashboard/page.tsx:
+   - Line 20-30: Defines the mock data for study hours and focus trends.
+   - Line 32-127: Renders the dashboard overview, including summary cards, a Recharts AreaChart for productivity, and an upcoming deadlines list.
+
+6. src/app/analytics/page.tsx:
+   - Line 60-180: Implements the Deep Analytics view with a Performance Forecast chart, a Radar chart for subject mastery, and cognitive load insights.
+
+7. src/app/planner/page.tsx:
+   - Line 38-250: Implements the Smart Planner interface with a task list, task completion toggles, and an 'Auto-Generate Plan' simulation.
+
+8. src/app/globals.css:
+   - Line 1: Imports Tailwind CSS.
+   - Line 19-45: Defines custom CSS components for the 'glass-card' and 'glass-button' using backdrop-blur and translucency.
+
+9. prisma/schema.prisma:
+   - Line 40-52: User model with relations to subjects, sessions, analytics, and reports.
+   - Line 62-71: Subject model with difficulty level and topic relations.
+   - Line 83-90: StudySession model for tracking duration and focus scores.
+   - Line 92-100: Analytics model for historical performance tracking.
+
+PROJECT SUCCESS CRITERIA
+------------------------
+Stratos is built to demonstrate real product thinking, backend proficiency, and modern frontend expertise. Its real-time charts, AI-driven predictions, and interactive Knowledge Graph make it a standout SaaS product for academic intelligence.
