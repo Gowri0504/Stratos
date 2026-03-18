@@ -28,8 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#020617] text-white min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-cyber-bg text-white min-h-screen relative`}
       >
+        <div className="bg-grid fixed inset-0 z-[-2]" />
+        <div className="bg-glow fixed inset-0 z-[-1]" />
         <Providers>
           <div className="relative flex flex-col min-h-screen">
             <div className="fixed inset-0 bg-gradient-to-br from-indigo-900/20 via-black to-violet-900/20 pointer-events-none" />

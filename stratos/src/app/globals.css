@@ -1,63 +1,135 @@
 @import "tailwindcss";
 
+@theme {
+  --color-cyber-black: #050505;
+  --color-cyber-blue: #00f2ff;
+  --color-cyber-pink: #ff00ff;
+  --color-cyber-yellow: #f3ec19;
+  --color-cyber-bg: #0d0d0d;
+}
+
 :root {
-  --background: #020617;
+  --background: var(--color-cyber-bg);
   --foreground: #ffffff;
+  --accent-primary: var(--color-cyber-blue);
+  --accent-secondary: var(--color-cyber-pink);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@theme {
-  --color-glass-white: rgba(255, 255, 255, 0.05);
-  --color-glass-indigo: rgba(99, 102, 241, 0.1);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
 @layer components {
-  .glass-card {
-    background-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(24px);
+  /* Futuristic Glassmorphism */
+  .cyber-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-  }
-  
-  .glass-button {
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition-property: all;
-    border-radius: 0.75rem;
-  }
-  
-  .glass-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .text-gradient {
-    background-image: linear-gradient(to right, #818cf8, #a78bfa);
+  .cyber-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cyber-card:hover::before {
+    transform: translateX(100%);
+  }
+
+  .cyber-card:hover {
+    border-color: rgba(0, 242, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Neon Button */
+  .cyber-button {
+    background: transparent;
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .cyber-button:hover {
+    background: var(--accent-primary);
+    color: var(--color-cyber-black);
+    box-shadow: 0 0 20px var(--accent-primary);
+  }
+
+  /* Cyberpunk Text Gradient */
+  .text-cyber {
+    background: linear-gradient(135deg, var(--color-cyber-blue), var(--color-cyber-pink));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+  }
+
+  /* Sidebar Active State */
+  .sidebar-active {
+    background: linear-gradient(90deg, rgba(0, 242, 255, 0.1) 0%, transparent 100%);
+    border-left: 3px solid var(--color-cyber-blue);
+    color: var(--color-cyber-blue) !important;
+  }
+
+  /* Custom Glow Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-cyber-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* Background grid effect */
+.bg-grid {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+.bg-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 242, 255, 0.05), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }

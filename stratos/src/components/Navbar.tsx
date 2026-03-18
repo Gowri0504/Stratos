@@ -7,27 +7,29 @@ export const Navbar = () => {
   const { data: session } = useSession();
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-white/10 backdrop-blur-md border-b border-white/20 px-6 py-4 flex justify-between items-center">
-      <div className="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
-        Stratos
+    <nav className="fixed top-0 z-50 w-full bg-cyber-bg/60 backdrop-blur-xl border-b border-white/5 px-8 py-5 flex justify-between items-center shadow-2xl">
+      <div className="text-3xl font-black text-cyber tracking-tighter italic">
+        STRATOS
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
         {session ? (
           <>
-            <span className="text-white/80">Hello, {session.user?.name}</span>
+            <span className="text-white/40 text-xs font-bold uppercase tracking-widest">
+              User // <span className="text-white">{session.user?.name}</span>
+            </span>
             <button
               onClick={() => signOut()}
-              className="px-4 py-2 rounded-lg bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 transition-all"
+              className="cyber-button text-xs py-2 px-6"
             >
-              Logout
+              Terminate Session
             </button>
           </>
         ) : (
           <Link
             href="/login"
-            className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all"
+            className="cyber-button text-xs py-2 px-6"
           >
-            Login
+            Access System
           </Link>
         )}
       </div>
